@@ -4,7 +4,7 @@ import Category from './Components/Explore/Category';
 import backgroundImage from '../../res/images/background.jpg';
 import {colors} from '../styles';
 
-export default class SearchScreen extends React.Component {
+export default class Politician extends React.Component {
   render() {
     return (
       <SafeAreaView>
