@@ -1,32 +1,45 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {colors} from '../../../styles';
+import PropTypes from 'prop-types';
+import {withNavigation} from 'react-navigation';
+
+const propTypes = {
+  imageUri: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  navigationFunction: PropTypes.func,
+};
+
+const defaultProps = {
+  navigationFunction: null,
+};
 
 class Category extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  onPressButton = () => {
+    // alert('Hello!');
+    // NavigationActions.navigate({routeName: 'Search'});
+    // navigate('Politician', {navigation: this.props.navigation});
+    this.props.navigation.navigate('Politician');
+  };
+
   render() {
     return (
-      <View
-        style={{
-          height: 130,
-          width: 130,
-          marginLeft: 20,
-          borderWidth: 0.5,
-          borderColor: '#dddddd',
-        }}>
+      <TouchableOpacity
+        style={styles.cardStyle}
+        onPress={() => this.onPressButton()}>
         <View style={{flex: 2}}>
-          <Image
-            source={this.props.imageUri}
-            style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}
-          />
+          <Image source={this.props.imageUri} style={styles.imageStyle} />
         </View>
         <View style={{flex: 1}}>
           <Text style={styles.headerText}>{this.props.name}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
-export default Category;
 
 const styles = StyleSheet.create({
   container: {
@@ -40,4 +53,22 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold',
   },
+  cardStyle: {
+    height: 130,
+    width: 130,
+    marginLeft: 20,
+    borderWidth: 0.5,
+    borderColor: '#dddddd',
+  },
+  imageStyle: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  iconHighlight: {
+    alignItems: 'center',
+  },
 });
+
+export default withNavigation(Category);

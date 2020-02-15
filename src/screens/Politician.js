@@ -9,27 +9,8 @@ export default class Politician extends React.Component {
     return (
       <SafeAreaView>
         <View style={{backgroundColor: 'white'}} />
-        <ScrollView>
-          <Text style={styles.headerText}>Education</Text>
-          <View>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              <Category
-                imageUri={require('../../res/images/bernie.png')}
-                name="Politicians"
-              />
-              <Category
-                imageUri={require('../../res/images/yang.jpg')}
-                name="Issues"
-              />
-              <Category
-                imageUri={require('../../res/images/trump.jpg')}
-                name="Topics"
-              />
-            </ScrollView>
-          </View>
-        </ScrollView>
+        <Text style={styles.headerText}>Politicians</Text>
+        <Text style={styles.headerText}>Trending</Text>
       </SafeAreaView>
     );
   }

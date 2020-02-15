@@ -9,6 +9,7 @@ import SearchScreen from './screens/Search';
 import DashboardScreen from './screens/Dashboard';
 import ProfileScreen from './screens/Profile';
 import SettingsScreen from './screens/Settings';
+import PoliticianScreen from './screens/Politician';
 
 /*
   Education - Search specifics, definitions
@@ -21,6 +22,7 @@ const SearchStack = createStackNavigator({
 });
 const EducationStack = createStackNavigator({
   Education: EducationScreen,
+  Politician: PoliticianScreen,
 });
 const DashboardStack = createStackNavigator({
   Dashboard: DashboardScreen,
