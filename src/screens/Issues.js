@@ -12,10 +12,8 @@ import {
   Image,
 } from 'react-native';
 import {colors} from '../styles';
-import {withNavigation} from 'react-navigation';
-import PoliticianProfile from './Components/PoliticianPage';
 
-class Politician extends React.Component {
+class Issues extends React.Component {
   constructor() {
     super();
 
@@ -50,7 +48,6 @@ class Politician extends React.Component {
   show_Selected_Category = item => {
     // Write your code here which you want to execute on sub category selection.
     Alert.alert(item);
-    this.props.navigation.navigate('PoliticianProfile');
   };
 
   render() {
@@ -92,7 +89,7 @@ class Politician extends React.Component {
   }
 }
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
 
@@ -103,57 +100,54 @@ class App extends React.Component {
     const array = [
       {
         expanded: false,
-        category_Name: '2020 Democratic Candidates',
+        category_Name: 'Social Issues',
         sub_Category: [
-          {id: 1, name: 'Biden'},
-          {id: 2, name: 'Bloomberg'},
-          {id: 3, name: 'Buttigieg'},
-          {id: 4, name: 'Gabbard'},
-          {id: 5, name: 'Klobuchar'},
-          {id: 6, name: 'Sanders'},
-          {id: 7, name: 'Steyer'},
+          {id: 1, name: 'LGBT Adoption Rights'},
+          {id: 2, name: 'Abortion'},
+          {id: 3, name: 'Gay Marriage'},
+          {id: 4, name: 'Government Mandates'},
+          {id: 5, name: 'Gun Buyback'},
+          {id: 6, name: 'Religious Freedom Act'},
+          {id: 7, name: 'Women in Combat'},
         ],
       },
 
       {
         expanded: false,
-        category_Name: '2020 Republican Candidates',
+        category_Name: 'Domestic Policy Issues',
+        sub_Category: [{id: 8, name: 'Gun Control'}, {id: 9, name: 'Armed Teachers'}],
+      },
+
+      {
+        expanded: false,
+        category_Name: 'Economic Issues',
         sub_Category: [
-          {id: 8, name: 'Trump'},
-          {id: 9, name: 'Weld'},
+          {id: 12, name: 'Equal Pay'},
+          {id: 13, name: 'Taxes'},
+          {id: 14, name: 'Minimum Wage'},
+          {id: 15, name: 'Corporate Tax'},
         ],
       },
 
       {
         expanded: false,
-        category_Name: 'Presidents',
+        category_Name: 'Environmental Issues',
         sub_Category: [
-          {id: 12, name: 'Pendrive'},
-          {id: 13, name: 'Bag'},
-          {id: 14, name: 'Mouse'},
-          {id: 15, name: 'Keyboard'},
+          {id: 16, name: 'Oil Drilling'},
+          {id: 17, name: 'Fracking'},
+          {id: 18, name: 'Alternative Energy'},
+          {id: 19, name: 'Plastic Product Ban'},
         ],
       },
 
       {
         expanded: false,
-        category_Name: 'Senators',
+        category_Name: 'Immigration',
         sub_Category: [
-          {id: 16, name: 'Home Audio Speakers'},
-          {id: 17, name: 'Home Theatres'},
-          {id: 18, name: 'Bluetooth Speakers'},
-          {id: 19, name: 'DTH Set Top Box'},
-        ],
-      },
-
-      {
-        expanded: false,
-        category_Name: 'Congressmen',
-        sub_Category: [
-          {id: 20, name: 'Mi'},
-          {id: 21, name: 'Thomson'},
-          {id: 22, name: 'LG'},
-          {id: 23, name: 'SONY'},
+          {id: 20, name: 'Border Wall'},
+          {id: 21, name: 'Muslim Immigrants'},
+          {id: 22, name: 'Immigration Ban'},
+          {id: 23, name: 'Immigration Healthcare'},
         ],
       },
     ];
@@ -180,9 +174,8 @@ class App extends React.Component {
       <View style={styles.MainContainer}>
         <ScrollView
           contentContainerStyle={{paddingHorizontal: 10, paddingVertical: 5}}>
-          <Text style={styles.headerText}>Politicians</Text>
           {this.state.AccordionData.map((item, key) => (
-              <Politician
+            <Issues
               key={item.category_Name}
               onClickFunction={this.update_Layout.bind(this, key)}
               item={item}
@@ -201,11 +194,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
     backgroundColor: '#F5FCFF',
   },
-  headerText: {
-    fontSize: 30,
-    color: colors.black,
-    fontWeight: 'bold',
-  },
+
   iconStyle: {
     width: 30,
     height: 30,
@@ -240,5 +229,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF6F00',
   },
 });
-
-export default withNavigation(App);

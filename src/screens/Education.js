@@ -7,6 +7,7 @@ import {
   Alert,
   ScrollView,
   TouchableOpacity,
+    Image,
 } from 'react-native';
 import {colors} from '../styles';
 import Category from './Components/Explore/Category';
@@ -20,13 +21,13 @@ export default class EducationScreen extends React.Component {
 
     this.state = {
       GridViewItems: [
-        {key: 'One'},
-        {key: 'Two'},
-        {key: 'Three'},
-        {key: 'Four'},
-        {key: 'Five'},
-        {key: 'Six'},
-        {key: 'Seven'},
+        {key: 'Andrew Yang'},
+        {key: 'Bernie Sanders'},
+        {key: 'Donald Trump'},
+        {key: 'Pete Buttigieg'},
+        {key: 'Global Epidemic'},
+        {key: 'World Health'},
+        {key: 'Primaries'},
         {key: 'Eight'},
         {key: 'Nine'},
         {key: 'Ten'},
@@ -44,20 +45,21 @@ export default class EducationScreen extends React.Component {
         <SearchBar></SearchBar>
         <Text style={styles.headerText}>Education</Text>
         <View>
-          <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <Category
-                imageUri={Bernie}
-                name="Politicians"
+              imageUri={Bernie}
+              name="Politicians"
+              navigationLocation="Politician"
             />
             <Category
-                imageUri={Yang}
-                name="Issues"
+              imageUri={Yang}
+              name="Issues"
+              navigationLocation="Issue"
             />
             <Category
-                imageUri={Trump}
-                name="Topics"
+              imageUri={Trump}
+              name="Topics"
+              navigationLocation="Topic"
             />
           </ScrollView>
         </View>

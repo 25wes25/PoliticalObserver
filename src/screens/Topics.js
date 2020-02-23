@@ -12,10 +12,8 @@ import {
   Image,
 } from 'react-native';
 import {colors} from '../styles';
-import {withNavigation} from 'react-navigation';
-import PoliticianProfile from './Components/PoliticianPage';
 
-class Politician extends React.Component {
+class Topics extends React.Component {
   constructor() {
     super();
 
@@ -50,7 +48,6 @@ class Politician extends React.Component {
   show_Selected_Category = item => {
     // Write your code here which you want to execute on sub category selection.
     Alert.alert(item);
-    this.props.navigation.navigate('PoliticianProfile');
   };
 
   render() {
@@ -92,7 +89,7 @@ class Politician extends React.Component {
   }
 }
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
 
@@ -103,7 +100,7 @@ class App extends React.Component {
     const array = [
       {
         expanded: false,
-        category_Name: '2020 Democratic Candidates',
+        category_Name: 'Constitution',
         sub_Category: [
           {id: 1, name: 'Biden'},
           {id: 2, name: 'Bloomberg'},
@@ -117,16 +114,13 @@ class App extends React.Component {
 
       {
         expanded: false,
-        category_Name: '2020 Republican Candidates',
-        sub_Category: [
-          {id: 8, name: 'Trump'},
-          {id: 9, name: 'Weld'},
-        ],
+        category_Name: 'How a Bill Becomes a Law',
+        sub_Category: [{id: 8, name: 'Trump'}, {id: 9, name: 'Weld'}],
       },
 
       {
         expanded: false,
-        category_Name: 'Presidents',
+        category_Name: 'Elections',
         sub_Category: [
           {id: 12, name: 'Pendrive'},
           {id: 13, name: 'Bag'},
@@ -137,7 +131,7 @@ class App extends React.Component {
 
       {
         expanded: false,
-        category_Name: 'Senators',
+        category_Name: 'Electoral College',
         sub_Category: [
           {id: 16, name: 'Home Audio Speakers'},
           {id: 17, name: 'Home Theatres'},
@@ -148,7 +142,7 @@ class App extends React.Component {
 
       {
         expanded: false,
-        category_Name: 'Congressmen',
+        category_Name: 'Campaign Finances',
         sub_Category: [
           {id: 20, name: 'Mi'},
           {id: 21, name: 'Thomson'},
@@ -180,9 +174,8 @@ class App extends React.Component {
       <View style={styles.MainContainer}>
         <ScrollView
           contentContainerStyle={{paddingHorizontal: 10, paddingVertical: 5}}>
-          <Text style={styles.headerText}>Politicians</Text>
           {this.state.AccordionData.map((item, key) => (
-              <Politician
+            <Topics
               key={item.category_Name}
               onClickFunction={this.update_Layout.bind(this, key)}
               item={item}
@@ -201,11 +194,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
     backgroundColor: '#F5FCFF',
   },
-  headerText: {
-    fontSize: 30,
-    color: colors.black,
-    fontWeight: 'bold',
-  },
+
   iconStyle: {
     width: 30,
     height: 30,
@@ -240,5 +229,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF6F00',
   },
 });
-
-export default withNavigation(App);

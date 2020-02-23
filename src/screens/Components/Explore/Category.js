@@ -8,10 +8,13 @@ const propTypes = {
   imageUri: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   navigationFunction: PropTypes.func,
+  navigationLocation: PropTypes.string,
+
 };
 
 const defaultProps = {
   navigationFunction: null,
+  navigationLocation: null,
 };
 
 class Category extends React.Component {
@@ -22,7 +25,7 @@ class Category extends React.Component {
     // alert('Hello!');
     // NavigationActions.navigate({routeName: 'Search'});
     // navigate('Politician', {navigation: this.props.navigation});
-    this.props.navigation.navigate('Politician');
+    this.props.navigation.navigate(this.props.navigationLocation);
   };
 
   render() {

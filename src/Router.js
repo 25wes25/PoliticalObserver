@@ -10,7 +10,10 @@ import DashboardScreen from './screens/Dashboard';
 import ProfileScreen from './screens/Profile';
 import SettingsScreen from './screens/Settings';
 import PoliticianScreen from './screens/Politician';
-
+import IssuesScreen from './screens/Issues';
+import TopicsScreen from './screens/Topics';
+import PoliticianProfile from './screens/Components/PoliticianPage';
+import Testing from './screens/Testing';
 /*
   Education - Search specifics, definitions
   Dashboard -
@@ -19,10 +22,14 @@ import PoliticianScreen from './screens/Politician';
 
 const SearchStack = createStackNavigator({
   Search: SearchScreen,
+  PoliticianProfile: PoliticianProfile,
 });
 const EducationStack = createStackNavigator({
   Education: EducationScreen,
   Politician: PoliticianScreen,
+  Issue: IssuesScreen,
+  Topic: TopicsScreen,
+  PoliticianProfile: PoliticianProfile,
 });
 const DashboardStack = createStackNavigator({
   Dashboard: DashboardScreen,
@@ -31,6 +38,9 @@ const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
   Settings: SettingsScreen,
 });
+const testStack = createStackNavigator({
+  Test: Testing,
+});
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
@@ -38,6 +48,7 @@ const BottomTabNavigator = createBottomTabNavigator(
     Education: EducationStack,
     Dashboard: DashboardStack,
     Profile: ProfileStack,
+    Test: testStack,
   },
   {
     navigationOptions: {
