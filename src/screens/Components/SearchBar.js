@@ -120,9 +120,6 @@ class SearchBar extends React.Component {
           onPress={this.handleSubmit.bind(this)}>
           <Text style={styles.buttonText}>SEARCH</Text>
         </TouchableHighlight>
-        <View>
-          <Text>{this.state.text}</Text>
-        </View>
         <FlatList
           data={this.state.dataSource}
           ItemSeparatorComponent={this.ListViewItemSeparator}
