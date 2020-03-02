@@ -31,7 +31,7 @@ class PoliticianPage extends React.Component {
 
   componentDidMount() {
     let text = this.state.value.toLowerCase().trim();
-    let url = `http://127.0.0.1:5000/politician/${text}`;
+    let url = `http://10.0.2.2:5000/politician/${text}`;
     // use 10.0.2.2 for android emulator
     //let url = 'http://10.0.2.2:5000/politician/sanders'
     console.log(url);
@@ -60,7 +60,7 @@ class PoliticianPage extends React.Component {
           </View>
           <View style={{flex: 1}}>
             <Text style={styles.title}>{text}</Text>
-            <Text style={styles.bioStyle}>
+            <Text style={styles.positionStyle}>
               {this.state.currentPosition}
             </Text>
           </View>
@@ -100,6 +100,13 @@ const styles = StyleSheet.create({
   },
   bioStyle: {
     fontWeight: 'normal',
+    textAlign: 'left',
+    fontSize: 16,
+    color: colors.black,
+    paddingHorizontal: 20,
+  },
+  positionStyle: {
+    fontStyle: 'italic',
     textAlign: 'left',
     fontSize: 16,
     color: colors.black,

@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import {withNavigation} from 'react-navigation';
 import PoliticianProfile from './PoliticianPage';
-//import all the components we are going to use.
 
 class SearchBar extends React.Component {
   constructor(props) {

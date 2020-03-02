@@ -6,37 +6,38 @@ import {
   FlatList,
   Alert,
   ScrollView,
-  TouchableOpacity,
-    Image,
 } from 'react-native';
 import {colors} from '../styles';
+import {withNavigation} from 'react-navigation';
 import Category from './Components/Explore/Category';
 import SearchBar from './Components/SearchBar';
 import Bernie from '../../res/images/bernie.png';
 import Yang from '../../res/images/yang.jpg';
 import Trump from '../../res/images/trump.jpg';
-export default class EducationScreen extends React.Component {
+class EducationScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       GridViewItems: [
-        {key: 'Andrew Yang'},
         {key: 'Bernie Sanders'},
-        {key: 'Donald Trump'},
         {key: 'Pete Buttigieg'},
-        {key: 'Global Epidemic'},
+        {key: 'Joe Biden'},
+        {key: 'Elizabeth Warren'},
+        {key: 'Donald Trump'},
         {key: 'World Health'},
         {key: 'Primaries'},
-        {key: 'Eight'},
-        {key: 'Nine'},
-        {key: 'Ten'},
+        {key: 'Coronavirus'},
+        {key: 'Nevada Primary'},
+        {key: 'Election 2020'},
       ],
     };
   }
 
   GetGridViewItem(item) {
-    Alert.alert(item);
+    this.props.navigation.navigate('PoliticianProfile', {
+      text: 'Bernie Sanders', //figure out how to grab name
+    });
   }
 
   render() {
@@ -121,3 +122,5 @@ const styles = StyleSheet.create({
     borderColor: '#dddddd',
   },
 });
+
+export default withNavigation(EducationScreen);

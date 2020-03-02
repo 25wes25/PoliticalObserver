@@ -13,7 +13,6 @@ import PoliticianScreen from './screens/Politician';
 import IssuesScreen from './screens/Issues';
 import TopicsScreen from './screens/Topics';
 import PoliticianProfile from './screens/Components/PoliticianPage';
-import Testing from './screens/Testing';
 /*
   Education - Search specifics, definitions
   Dashboard -
@@ -38,21 +37,34 @@ const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
   Settings: SettingsScreen,
 });
-const testStack = createStackNavigator({
-  Test: Testing,
-});
 
 const BottomTabNavigator = createBottomTabNavigator(
   {
-    Search: SearchStack,
-    Education: EducationStack,
-    Dashboard: DashboardStack,
-    Profile: ProfileStack,
-    Test: testStack,
+    Search: {
+      screen: SearchStack,
+      // need to import from another library
+      // navigationOptions: () => ({
+      //   tabBarIcon: ({tintColor}) => (
+      //     <Icon name="book" size={25} color={tintColor} />
+      //   ),
+      // }),
+    },
+    Education: {
+      screen: EducationStack,
+    },
+    Dashboard: {
+      screen: DashboardStack,
+    },
+    Profile: {
+      screen: ProfileStack,
+    },
   },
   {
     navigationOptions: {
       headerShown: false,
+    },
+    tabBarOptions: {
+      activeTintColor: '#eb6e3d',
     },
   },
 );
