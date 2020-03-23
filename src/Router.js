@@ -25,7 +25,15 @@ const SearchStack = createStackNavigator({
 });
 const EducationStack = createStackNavigator({
   Education: EducationScreen,
-  Politician: PoliticianScreen,
+  Politician: {
+    screen: PoliticianScreen,
+    navigationOptions: ({navigate, navigation}) => ({
+      headerTitle: 'Politicians',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }),
+  },
   Issue: IssuesScreen,
   Topic: TopicsScreen,
   PoliticianProfile: PoliticianProfile,

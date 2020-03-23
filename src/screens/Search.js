@@ -11,8 +11,7 @@ export default class SearchScreen extends React.Component {
       <SafeAreaView>
         <View style={{backgroundColor: 'white'}} />
         <ScrollView>
-          <SearchBar></SearchBar>
-          <Text style={styles.headerText}>Games</Text>
+          <Text style={styles.headerText}>Search</Text>
         </ScrollView>
       </SafeAreaView>
     );

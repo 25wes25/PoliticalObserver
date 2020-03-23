@@ -1,244 +1,132 @@
 import React from 'react';
 import {
-  Alert,
-  LayoutAnimation,
-  StyleSheet,
-  View,
   Text,
-  ScrollView,
-  UIManager,
-  TouchableOpacity,
-  Platform,
+  View,
+  StyleSheet,
   Image,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {colors} from '../styles';
-import {withNavigation} from 'react-navigation';
-import PoliticianProfile from './Components/PoliticianPage';
+import SearchBar from './Components/SearchBar';
 
-class Politician extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      layout_Height: 0,
-    };
+export default class Politician extends React.Component {
+  constructor(props) {
+    super(props);
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.item.expanded) {
-      this.setState(() => {
-        return {
-          layout_Height: null,
-        };
-      });
-    } else {
-      this.setState(() => {
-        return {
-          layout_Height: 0,
-        };
-      });
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.layout_Height !== nextState.layout_Height) {
-      return true;
-    }
-    return false;
-  }
-
-  show_Selected_Category = item => {
-    // Write your code here which you want to execute on sub category selection.
-    Alert.alert(item);
+  onPressPolitician = () => {
     this.props.navigation.navigate('PoliticianProfile');
   };
 
   render() {
     return (
-      <View style={styles.Panel_Holder}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={this.props.onClickFunction}
-          style={styles.category_View}>
-          <Text style={styles.category_Text}>
-            {this.props.item.category_Name}{' '}
-          </Text>
-
-          <Image
-            source={{
-              uri:
-                'https://reactnativecode.com/wp-content/uploads/2019/02/arrow_right_icon.png',
-            }}
-            style={styles.iconStyle}
-          />
-        </TouchableOpacity>
-
-        <View style={{height: this.state.layout_Height, overflow: 'hidden'}}>
-          {this.props.item.sub_Category.map((item, key) => (
-            <TouchableOpacity
-              key={key}
-              style={styles.sub_Category_Text}
-              onPress={this.show_Selected_Category.bind(this, item.name)}>
-              <Text> {item.name} </Text>
-
-              <View
-                style={{width: '100%', height: 1, backgroundColor: '#000'}}
-              />
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
-    );
-  }
-}
-
-class App extends React.Component {
-  constructor() {
-    super();
-
-    if (Platform.OS === 'android') {
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-
-    const array = [
-      {
-        expanded: false,
-        category_Name: '2020 Democratic Candidates',
-        sub_Category: [
-          {id: 1, name: 'Biden'},
-          {id: 2, name: 'Bloomberg'},
-          {id: 3, name: 'Buttigieg'},
-          {id: 4, name: 'Gabbard'},
-          {id: 5, name: 'Klobuchar'},
-          {id: 6, name: 'Sanders'},
-          {id: 7, name: 'Steyer'},
-        ],
-      },
-
-      {
-        expanded: false,
-        category_Name: '2020 Republican Candidates',
-        sub_Category: [
-          {id: 8, name: 'Trump'},
-          {id: 9, name: 'Weld'},
-        ],
-      },
-
-      {
-        expanded: false,
-        category_Name: 'Presidents',
-        sub_Category: [
-          {id: 12, name: 'Pendrive'},
-          {id: 13, name: 'Bag'},
-          {id: 14, name: 'Mouse'},
-          {id: 15, name: 'Keyboard'},
-        ],
-      },
-
-      {
-        expanded: false,
-        category_Name: 'Senators',
-        sub_Category: [
-          {id: 16, name: 'Home Audio Speakers'},
-          {id: 17, name: 'Home Theatres'},
-          {id: 18, name: 'Bluetooth Speakers'},
-          {id: 19, name: 'DTH Set Top Box'},
-        ],
-      },
-
-      {
-        expanded: false,
-        category_Name: 'Congressmen',
-        sub_Category: [
-          {id: 20, name: 'Mi'},
-          {id: 21, name: 'Thomson'},
-          {id: 22, name: 'LG'},
-          {id: 23, name: 'SONY'},
-        ],
-      },
-    ];
-
-    this.state = {AccordionData: [...array]};
-  }
-
-  update_Layout = index => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
-    const array = [...this.state.AccordionData];
-
-    array[index].expanded = !array[index].expanded;
-
-    this.setState(() => {
-      return {
-        AccordionData: array,
-      };
-    });
-  };
-
-  render() {
-    return (
-      <View style={styles.MainContainer}>
-        <ScrollView
-          contentContainerStyle={{paddingHorizontal: 10, paddingVertical: 5}}>
-          <Text style={styles.headerText}>Politicians</Text>
-          {this.state.AccordionData.map((item, key) => (
-              <Politician
-              key={item.category_Name}
-              onClickFunction={this.update_Layout.bind(this, key)}
-              item={item}
-            />
-          ))}
+      <SafeAreaView>
+        <View style={{backgroundColor: 'white'}} />
+        <ScrollView>
+          <SearchBar />
+          <Text style={styles.headerText}>Others are viewing</Text>
+          <ScrollView
+            style={{paddingLeft: 10}}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/yang.jpg')}
+                />
+                <Text style={styles.captionStyle}>Politician 1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/bernie.png')}
+                />
+                <Text style={styles.captionStyle}>Politician 2</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/trump.jpg')}
+                />
+                <Text style={styles.captionStyle}>Politician 3</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/trump.jpg')}
+                />
+                <Text style={styles.captionStyle}>Politician 4</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+          <Text style={styles.headerText}>Recommended for you</Text>
+          <ScrollView
+            style={{paddingLeft: 10}}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/yang.jpg')}
+                />
+                <Text style={styles.captionStyle}>Politician 1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/bernie.png')}
+                />
+                <Text style={styles.captionStyle}>Politician 2</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/trump.jpg')}
+                />
+                <Text style={styles.captionStyle}>Politician 3</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onPressPolitician()}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('../../res/images/trump.jpg')}
+                />
+                <Text style={styles.captionStyle}>Politician 4</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  MainContainer: {
-    flex: 1,
+  container: {
+    alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: Platform.OS === 'ios' ? 20 : 0,
-    backgroundColor: '#F5FCFF',
   },
   headerText: {
+    marginLeft: 10,
     fontSize: 30,
     color: colors.black,
     fontWeight: 'bold',
   },
-  iconStyle: {
-    width: 30,
-    height: 30,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    tintColor: '#fff',
-  },
-
-  sub_Category_Text: {
-    fontSize: 18,
-    color: '#000',
-    padding: 10,
-  },
-
-  category_Text: {
-    textAlign: 'left',
-    color: '#fff',
-    fontSize: 21,
-    padding: 10,
-  },
-
-  category_View: {
-    marginVertical: 5,
+  iconContainer: {
+    height: 135,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#0091EA',
   },
-
-  Btn: {
-    padding: 10,
-    backgroundColor: '#FF6F00',
+  imageStyle: {
+    margin: 4,
+    width: 110,
+    height: 110,
+  },
+  captionStyle: {
+    fontWeight: 'bold',
+    color: 'black',
+    alignSelf: 'center',
   },
 });
-
-export default withNavigation(App);

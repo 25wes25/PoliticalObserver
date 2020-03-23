@@ -2,8 +2,6 @@ import React from 'react';
 import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
 import {withNavigation} from 'react-navigation';
 import {colors} from '../../styles';
-import Bernie from '../../../res/images/bernie.png';
-import SearchBar from '../Components/SearchBar';
 
 class PoliticianPage extends React.Component {
   state = {
@@ -14,35 +12,29 @@ class PoliticianPage extends React.Component {
     currentPosition: '',
   };
 
-  receivedValue = value => {
-    this.setState({value});
+  receivedValue = text => {
+    this.setState({value: text});
+    console.log('Received Value: ', this.state.value);
   };
-
-  // getPoliticianInfo = value => {
-  //   let text = value.toLowerCase().trim();
-  //   // const URL = `http://127.0.0.1:5000/politician/${text}`;
-  //   const URL = 'http://127.0.0.1:5000/politician/sanders';
-  //   // return fetch(URL).then(res => res.json());
-  //   // this.setState({bio: result.name});
-  //   fetch(URL)
-  //       .then(res => res.json())
-  //       .then(this.setState({bio: 'hello'});
-  // };
 
   componentDidMount() {
     let text = this.state.value.toLowerCase().trim();
-    let url = `http://10.0.2.2:5000/politician/${text}`;
+    // let url = `http://10.0.2.2:5000/politician/${text}`;
     // use 10.0.2.2 for android emulator
     //let url = 'http://10.0.2.2:5000/politician/sanders'
+    let url = 'http://10.0.2.2:3000/politicians/Joe Biden';
     console.log(url);
-    return fetch('http://10.0.2.2:5000/politician/sanders')
+    // let url = 'http://127.0.0.1:3000/users/ccatherinepham@gmail.com';
+    // 'http://10.0.2.2:3000/politicians/${text}'
+    // console.log(url);
+    return fetch(url)
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
-          name: responseJson.name,
-          bio: responseJson.bio,
-          image: responseJson.image,
-          currentPosition: responseJson.currentPosition,
+          // name: responseJson._id,
+          name: responseJson[0].name,
+          bio: responseJson[0].bio,
+          image: responseJson[0].image,
         });
       })
       .catch(error => {
@@ -51,15 +43,15 @@ class PoliticianPage extends React.Component {
   }
 
   render() {
-    const text = this.props.navigation.getParam('text', 'nothing sent');
+    // const text = this.props.navigation.getParam('text', 'nothing sent');
     return (
       <ScrollView style={styles.container}>
         <View style={{flexDirection: 'row'}}>
           <View style={{flex: 1}}>
-            <Image style={styles.image} source={Bernie} />
+            <Image style={styles.image} source={{uri: this.state.image}} />
           </View>
           <View style={{flex: 1}}>
-            <Text style={styles.title}>{text}</Text>
+            <Text style={styles.title}>{this.state.name}</Text>
             <Text style={styles.positionStyle}>
               {this.state.currentPosition}
             </Text>
@@ -74,14 +66,13 @@ class PoliticianPage extends React.Component {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 65,
-    flex: 1,
+    marginTop: 20,
   },
   image: {
     width: '80%',
     height: 'auto',
     aspectRatio: 1,
-    margin: '9%',
+    marginLeft: 20,
   },
   title: {
     fontWeight: 'bold',
